@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	@apply text-xl
+}
+
+
+input {
+	@apply block border-2 border-gray-200 px-2 rounded
+}
+
+input:focus {
+	@apply border-sky-500 outline-none
+}
+
+button {
+	@apply block p-2 transition-all duration-100 border-2 rounded border-sky-700
+}
+
+button:hover {
+	@apply bg-sky-100
+}
+
+button:disabled {
+	@apply text-gray-500 cursor-not-allowed border-gray-400
+}
+
+button:disabled:hover {
+	@apply bg-white
+}
+
+.error {
+	@apply text-red-500
+}
