@@ -1,19 +1,37 @@
 import * as React from 'react'
 import SignIn from './components/signIn/SignIn'
+import Map from './components/map/Map'
 
 function App() {
-	// переключаем скрины с помощью состояния
-	const [screenType, setScreenType] = React.useState('auth')
 
-	let isSignedIn = screenType !== 'auth'
+
+	// переключаем скрины с помощью состояния
+	const [screenType, setScreenType] = React.useState(() => {
+		if (!!localStorage.getItem('sign-in')) {
+			return 'map'
+		} else {
+			return 'auth'
+		}
+	})
+
+	const handleLogOut = React.useCallback(() => {
+		localStorage.clear()
+		setScreenType('auth')
+	}, [])
+
+	const handleLogIn = React.useCallback(() => {
+		localStorage.setItem('sign-in', true)
+		setScreenType('map')
+	}, [])
 
 	return (
 		<>
-			<div className="w-[90%] mx-auto flex flex-col items-center justify-center h-screen">
-				{screenType === 'auth'
-					? <SignIn setScreenType={setScreenType} />
-					: 'map'}
-			</div>
+
+			{screenType === 'auth'
+				? <SignIn login={handleLogIn} />
+				: <Map logout={handleLogOut} />
+			}
+
 		</>
 	)
 }

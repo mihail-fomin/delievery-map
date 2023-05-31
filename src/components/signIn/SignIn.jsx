@@ -2,24 +2,24 @@ import * as React from 'react'
 import { Formik, Form, Field } from 'formik';
 import { validateSignIn } from './validateSginIn'
 
-export default function SignIn({ setScreenType }) {
+export default function SignIn({ login }) {
 	const [wrongLogin, setWrongLogin] = React.useState(false)
 
 
-
 	return (
-		<>
-			<h1>Welcome to the Delievery service!</h1>
+		<div className='flex justify-center'>
+			<h1 className='font-bold'>Welcome to the Delievery service!</h1>
 			<Formik
 				initialValues={{ login: '', password: '' }}
 				validate={validateSignIn}
-				onSubmit={(values) => {
-					if (values.login === 'test' && values.password === 'test') {
-						setScreenType('map')
-					} else {
-						setWrongLogin(true)
+				onSubmit={
+					(values) => {
+						if (values.login === 'test' && values.password === 'test') {
+							login()
+						} else {
+							setWrongLogin(true)
+						}
 					}
-				}
 				}
 			>
 				{({
@@ -30,9 +30,12 @@ export default function SignIn({ setScreenType }) {
 					handleBlur,
 					handleSubmit,
 				}) => (
-					<Form onSubmit={handleSubmit}>
+					<Form
+						className='mt-6'
+						onSubmit={handleSubmit}
+					>
 						<label>
-							login
+							Login
 							<Field
 								type="text"
 								name="login"
@@ -45,7 +48,7 @@ export default function SignIn({ setScreenType }) {
 							<div className='error'>{errors.login}</div>
 						}
 						<label>
-							password
+							Password
 							<Field
 								type="password"
 								name="password"
@@ -65,6 +68,6 @@ export default function SignIn({ setScreenType }) {
 					</Form>
 				)}
 			</Formik>
-		</>
+		</div>
 	)
 }
