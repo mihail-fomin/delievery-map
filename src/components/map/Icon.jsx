@@ -3,7 +3,6 @@ import { MapPinIcon } from '@heroicons/react/24/solid'
 
 export default function Icon({ point, desc, index, isActive, onMouseOver, onMouseOut }) {
 
-
 	return (
 		<div
 			key={point.name}

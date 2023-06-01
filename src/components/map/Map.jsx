@@ -1,6 +1,5 @@
 import * as React from 'react'
 import initialPoints from '../../../public/model'
-import { MapPinIcon } from '@heroicons/react/24/solid'
 import Icon from './Icon';
 
 export default function Map({ logout }) {
@@ -35,15 +34,15 @@ export default function Map({ logout }) {
 	//	bg-center bg-no-repeat bg-[url('../../../public/tutzing.svg')]
 	return (
 
-		<div className="container relative h-screen mx-auto ">
+		<div className="container relative h-screen mx-auto">
 			<menu className="flex justify-between w-full mt-3 border-b-2 border-gray-400 ">
 				<button>Add point</button>
 				<button onClick={handleLogOut}>
 					Log out
 				</button>
 			</menu>
-			<div className='relative w-[1000px] h-[1000px]'>
-				<img className='w-full h-full' src='../../../public/tutzing.svg' />
+			<div className='relative w-[1000px] h-[1000px] mx-auto'>
+				<img className='w-auto h-full ' src='../../../public/tutzing.svg' />
 				{points.map((point, index) => (
 					<Icon
 						key={index}
