@@ -1,15 +1,19 @@
 import * as React from 'react'
 import initialPoints from '../../../public/model'
 import Point from './Point';
-import { Dialog } from '@headlessui/react'
+import ModalForm from './ModalForm';
+
 
 export default function Map({ logout }) {
 	const [isOpen, setIsOpen] = React.useState(false)
 	const [clickOnMap, setClickOnMap] = React.useState(false)
 	const [hoveredIndex, setHoveredIndex] = React.useState(null);
 
-	let [xValue, setXValue] = React.useState(0)
-	let [yValue, setYValue] = React.useState(0)
+	const [nameValue, setNameValue] = React.useState('')
+	const [amountValue, setAmountValue] = React.useState('')
+
+	const [xValue, setXValue] = React.useState(0)
+	const [yValue, setYValue] = React.useState(0)
 
 	const [points, setPoints] = React.useState(() => {
 		const str = localStorage.getItem('points')
@@ -45,6 +49,24 @@ export default function Map({ logout }) {
 		}
 	}
 
+	const handleXValueChange = (e) => {
+		setXValue(e.target.value)
+	}
+
+	const handleYValueChange = (e) => {
+		setYValue(e.target.value)
+	}
+
+	const handleSetPoints = (e) => {
+		e.preventDefault()
+		setPoints(
+			points.concat([{ name: nameValue, amount: amountValue, x: xValue, y: yValue }])
+		)
+		localStorage.setItem('points', JSON.stringify(points))
+		setIsOpen(false)
+		console.log('nameValue: ', nameValue);
+
+	}
 
 	const handleLogOut = (e) => {
 		e.preventDefault()
@@ -54,11 +76,13 @@ export default function Map({ logout }) {
 	return (
 
 		<div className="container relative h-screen mx-auto">
-			<menu className="flex justify-between w-full mt-3 border-b-2 border-gray-400">
-				<button onClick={handleAddClick}>
-					Add point
-				</button>
-				{setIsOpen ? <p>Click on the map</p> : ''}
+			<menu className="flex justify-between w-full my-3">
+				<div className='flex items-center gap-2'>
+					<button onClick={handleAddClick}>
+						Add point
+					</button>
+					{clickOnMap ? <p>Click on the map</p> : ''}
+				</div>
 				<button onClick={handleLogOut}>
 					Log out
 				</button>
@@ -67,34 +91,19 @@ export default function Map({ logout }) {
 				<img
 					onClick={handleMapClick}
 					className='w-auto h-full ' src='../../../public/tutzing.svg' />
-				<Dialog
-					style={{ left: `${xValue}%`, top: `${yValue}%` }}
-					className='absolute p-2 bg-white rounded'
-					open={isOpen}
-					onClose={() => setIsOpen(false)}
-				>
-					<Dialog.Panel>
-						<form>
-							<label>
-								name
-								<input placeholder='name' />
-							</label>
-							<label>
-								amount
-								<input placeholder='amount' />
-							</label>
-							<label>
-								x
-								<input placeholder={xValue} />
-							</label>
-							<label>
-								y
-								<input placeholder={yValue} />
-							</label>
-						</form>
-						<button onClick={() => setIsOpen(false)}>Cancel</button>
-					</Dialog.Panel>
-				</Dialog>
+				<ModalForm
+					xValue={xValue}
+					yValue={yValue}
+					isOpen={isOpen}
+					setIsOpen={setIsOpen}
+					nameValue={nameValue}
+					setNameValue={setNameValue}
+					amountValue={amountValue}
+					setAmountValue={setAmountValue}
+					handleXValueChange={handleXValueChange}
+					handleYValueChange={handleYValueChange}
+					handleSetPoints={handleSetPoints}
+				/>
 				{points.map((point, index) => (
 					<Point
 						key={index}

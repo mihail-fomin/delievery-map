@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { MapPinIcon } from '@heroicons/react/24/solid'
 import { Dialog } from '@headlessui/react'
+import InputField from './Inputfield';
 
 
 export default function Point({ point, desc, index, isActive, onMouseOver, onMouseOut, handlePointClick }) {
@@ -25,29 +26,17 @@ export default function Point({ point, desc, index, isActive, onMouseOver, onMou
 				</div>
 			}
 			<Dialog
-				style={{ left: `${point.x}%`, top: `${point.y}%` }}
+				style={{ left: `${point.x.toFixed(2)}%`, top: `${point.y.toFixed(2)}%` }}
 				className='absolute p-2 bg-white rounded'
 				open={isOpen}
 				onClose={() => setIsOpen(false)}
 			>
 				<Dialog.Panel>
 					<form>
-						<label>
-							{point.name}
-							<input placeholder={point.name} />
-						</label>
-						<label>
-							{point.amount}
-							<input placeholder={point.amount} />
-						</label>
-						<label>
-							{point.x}
-							<input placeholder={point.x} />
-						</label>
-						<label>
-							{point.y}
-							<input placeholder={point.y} />
-						</label>
+						<InputField label='name' placeholder={point.name} />
+						<InputField label='amount' placeholder={point.amount} />
+						<InputField label='x' placeholder={point.x.toFixed(2)} />
+						<InputField label='y' placeholder={point.y.toFixed(2)} />
 					</form>
 					<button onClick={() => setIsOpen(false)}>Cancel</button>
 					<button onClick={() => setIsOpen(false)}>Remove point</button>
