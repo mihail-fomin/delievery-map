@@ -33,7 +33,10 @@ export default function ModalForm({
 			onClose={() => setIsOpen(false)}
 		>
 			<Dialog.Panel>
+
 				<form>
+					{console.log('1')}
+
 					<InputField
 						label={'name'}
 						placeholder={'name'}
