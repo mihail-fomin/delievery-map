@@ -1,6 +1,5 @@
 import { Dialog } from '@headlessui/react'
 import InputField from './Inputfield';
-import { Formik, Form, Field } from 'formik';
 
 export default function ModalForm({
 	xValue,
@@ -11,9 +10,8 @@ export default function ModalForm({
 	setNameValue,
 	amountValue,
 	setAmountValue,
-	handleXValueChange,
-	handleYValueChange,
-	handleSetPoints
+	points,
+	setPoints
 }) {
 
 	const handleNameChange = (e) => {
@@ -24,6 +22,14 @@ export default function ModalForm({
 		setAmountValue(e.target.value)
 	}
 
+	const handleSetPoints = (e) => {
+		e.preventDefault()
+		setPoints(
+			points.concat([{ name: nameValue, amount: amountValue, x: xValue, y: yValue }])
+		)
+		localStorage.setItem('points', JSON.stringify(points))
+		setIsOpen(false)
+	}
 
 	return (
 		<Dialog
@@ -50,14 +56,10 @@ export default function ModalForm({
 					<InputField
 						label={'x'}
 						placeholder={xValue}
-						value={xValue}
-						onChange={handleXValueChange}
 					/>
 					<InputField
 						label={'y'}
 						placeholder={yValue}
-						value={yValue}
-						onChange={handleYValueChange}
 					/>
 				</form>
 				<div className='flex gap-2 mt-3'>

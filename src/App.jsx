@@ -28,12 +28,10 @@ function App() {
 
 	return (
 		<>
-
 			{screenType === 'auth'
 				? <SignIn signIn={handleLogIn} />
 				: <Map logout={handleLogOut} />
 			}
-
 		</>
 	)
 }

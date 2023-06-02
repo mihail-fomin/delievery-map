@@ -8,12 +8,11 @@ export default function Map({ logout }) {
 	const [isOpen, setIsOpen] = React.useState(false)
 	const [clickOnMap, setClickOnMap] = React.useState(false)
 	const [hoveredIndex, setHoveredIndex] = React.useState(null);
-
 	const [nameValue, setNameValue] = React.useState('')
 	const [amountValue, setAmountValue] = React.useState('')
-
 	const [xValue, setXValue] = React.useState(0)
 	const [yValue, setYValue] = React.useState(0)
+
 
 	const [points, setPoints] = React.useState(() => {
 		const str = localStorage.getItem('points')
@@ -47,22 +46,6 @@ export default function Map({ logout }) {
 		}
 	}
 
-	const handleXValueChange = () => {
-		setXValue(e.target.value)
-	}
-
-	const handleYValueChange = () => {
-		setYValue(e.target.value)
-	}
-
-	const handleSetPoints = (e) => {
-		e.preventDefault()
-		setPoints(
-			points.concat([{ name: nameValue, amount: amountValue, x: xValue, y: yValue }])
-		)
-		localStorage.setItem('points', JSON.stringify(points))
-		setIsOpen(false)
-	}
 
 	const handleUndoChanges = () => {
 		localStorage.removeItem('points')
@@ -74,17 +57,21 @@ export default function Map({ logout }) {
 		logout()
 	}
 
+
 	return (
 
 		<div className="container relative h-screen mx-auto">
 			<menu className="flex justify-between w-full my-3">
 				<div className='flex items-center gap-2'>
 					<button onClick={handleAddClick}>
-						Add point
+						{clickOnMap
+							? <p className='cursor-not-allowed animate-pulse'>Click on the map</p>
+							: 'Add point'}
 					</button>
-					{clickOnMap ? <p>Click on the map</p> : ''}
 				</div>
-				<button onClick={handleUndoChanges}>Undoo Changes</button>
+				<button onClick={handleUndoChanges}>
+					Undo Changes
+				</button>
 				<button onClick={handleLogOut}>
 					Log out
 				</button>
@@ -102,9 +89,9 @@ export default function Map({ logout }) {
 					setNameValue={setNameValue}
 					amountValue={amountValue}
 					setAmountValue={setAmountValue}
-					handleXValueChange={handleXValueChange}
-					handleYValueChange={handleYValueChange}
-					handleSetPoints={handleSetPoints}
+					// handleSetPoints={handleSetPoints}
+					points={points}
+					setPoints={setPoints}
 				/>
 				{points.map((point, index) => (
 					<Point
@@ -112,9 +99,19 @@ export default function Map({ logout }) {
 						point={point}
 						desc={`${point.name}`}
 						index={index}
+						nameValue={nameValue}
+						setNameValue={setNameValue}
+						amountValue={amountValue}
+						setAmountValue={setAmountValue}
+						xValue={xValue}
+						setXValue={setXValue}
+						yValue={yValue}
+						setYValue={setYValue}
 						isActive={hoveredIndex === index}
 						onMouseOver={handleIconMouseOver}
 						onMouseOut={handleIconMouseOut}
+						points={points}
+						setPoints={setPoints}
 					/>
 				))}
 			</div>
