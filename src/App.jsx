@@ -15,6 +15,8 @@ function App() {
 	})
 
 	const handleLogOut = React.useCallback(() => {
+		// очищаем весь localStorage, чтобы новый пользователь не увидел
+		// ...изменения предидущего пользователя
 		localStorage.clear()
 		setScreenType('auth')
 	}, [])

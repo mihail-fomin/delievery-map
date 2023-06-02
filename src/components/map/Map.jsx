@@ -62,8 +62,11 @@ export default function Map({ logout }) {
 		)
 		localStorage.setItem('points', JSON.stringify(points))
 		setIsOpen(false)
-		console.log('nameValue: ', nameValue);
+	}
 
+	const handleUndoChanges = () => {
+		localStorage.removeItem('points')
+		setPoints(initialPoints)
 	}
 
 	const handleLogOut = (e) => {
@@ -81,6 +84,7 @@ export default function Map({ logout }) {
 					</button>
 					{clickOnMap ? <p>Click on the map</p> : ''}
 				</div>
+				<button onClick={handleUndoChanges}>Undoo Changes</button>
 				<button onClick={handleLogOut}>
 					Log out
 				</button>

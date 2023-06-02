@@ -35,8 +35,6 @@ export default function ModalForm({
 			<Dialog.Panel>
 
 				<form>
-					{console.log('1')}
-
 					<InputField
 						label={'name'}
 						placeholder={'name'}
