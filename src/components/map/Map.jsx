@@ -25,8 +25,7 @@ export default function Map({ logout }) {
 		}
 	})
 
-	const handleAddClick = (e) => {
-		e.preventDefault()
+	const handleAddClick = () => {
 		setClickOnMap(true)
 	}
 
@@ -39,7 +38,6 @@ export default function Map({ logout }) {
 	}
 
 	const handleMapClick = (e) => {
-		e.preventDefault()
 
 		if (clickOnMap) {
 			setIsOpen(true)
@@ -49,11 +47,11 @@ export default function Map({ logout }) {
 		}
 	}
 
-	const handleXValueChange = (e) => {
+	const handleXValueChange = () => {
 		setXValue(e.target.value)
 	}
 
-	const handleYValueChange = (e) => {
+	const handleYValueChange = () => {
 		setYValue(e.target.value)
 	}
 

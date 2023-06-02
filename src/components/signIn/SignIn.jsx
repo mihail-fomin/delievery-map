@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { Formik, Form, Field } from 'formik';
 import { validateSignIn } from './validateSginIn'
+import InputField from './InputField';
 
-export default function SignIn({ login }) {
+export default function SignIn({ signIn }) {
 	const [wrongLogin, setWrongLogin] = React.useState(false)
 
 
@@ -14,9 +15,12 @@ export default function SignIn({ login }) {
 				validate={validateSignIn}
 				onSubmit={
 					(values) => {
+						// если введены верные логин/пароль
 						if (values.login === 'test' && values.password === 'test') {
-							login()
+							// делаем переход на рабочую страницу
+							signIn()
 						} else {
+							// иначе - возвращаем подсказку
 							setWrongLogin(true)
 						}
 					}
@@ -34,34 +38,28 @@ export default function SignIn({ login }) {
 						className='mt-6'
 						onSubmit={handleSubmit}
 					>
-						<label>
-							Login
-							<Field
-								type="text"
-								name="login"
-								onChange={handleChange}
-								onBlur={handleBlur}
-								value={values.login}
-							/>
-						</label>
-						{errors.login && touched.login &&
-							<div className='error'>{errors.login}</div>
-						}
-						<label>
-							Password
-							<Field
-								type="password"
-								name="password"
-								onChange={handleChange}
-								onBlur={handleBlur}
-								value={values.password}
-							/>
-						</label>
-						{errors.password && touched.password &&
-							<div className='error'>{errors.password}</div>}
+						<InputField
+							label='Login'
+							type='text'
+							name='login'
+							value={values.login}
+							errors={errors.login}
+							touched={touched.login}
+							handleChange={handleChange}
+							handleBlur={handleBlur}
+						/>
+						<InputField
+							label='Password'
+							type='password'
+							name='password'
+							value={values.password}
+							errors={errors.password}
+							touched={touched.password}
+							handleChange={handleChange}
+							handleBlur={handleBlur}
+						/>
 						{/* Оповещаем о неправильно введенном логине/пароле */}
 						{wrongLogin ? <p className='error'>Oops! try "test"-"test" </p> : ''}
-
 						<button className='mt-3' type="submit" disabled={Object.keys(errors).length}>
 							Sign In
 						</button>
