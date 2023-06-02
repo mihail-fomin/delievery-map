@@ -8,7 +8,7 @@ export default function SignIn({ signIn }) {
 
 
 	return (
-		<div className='flex justify-center'>
+		<div className='flex flex-col items-center justify-center h-screen'>
 			<h1 className='font-bold'>Welcome to the Delievery service!</h1>
 			<Formik
 				initialValues={{ login: '', password: '' }}
