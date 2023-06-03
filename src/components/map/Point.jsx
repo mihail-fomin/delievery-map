@@ -4,7 +4,6 @@ import { Dialog } from '@headlessui/react'
 import InputField from './Inputfield';
 import { useDispatch, useSelector } from 'react-redux'
 import {
-	loadFromLocalStorage,
 	removePoint,
 	setNameValue,
 	setAmountValue,
@@ -31,19 +30,19 @@ export default function Point({
 	const dispatch = useDispatch()
 
 	const handleNameChange = (e) => {
-		setNameValue(e.target.value)
+		dispatch(setNameValue(e.target.value))
 	}
 
 	const handleAmountChange = (e) => {
-		setAmountValue(e.target.value)
+		dispatch(setAmountValue(e.target.value))
 	}
 
 	const handleXValueChange = (e) => {
-		setXValue(e.target.value)
+		dispatch(setXValue(e.target.value))
 	}
 
 	const handleYValueChange = (e) => {
-		setYValue(e.target.value)
+		dispatch(setYValue(e.target.value))
 	}
 
 	const handleRemovePoint = (name) => {
@@ -81,26 +80,22 @@ export default function Point({
 					<form>
 						<InputField
 							label='name'
-							placeholder={point.name}
-							value={nameValue}
+							value={point.name}
 							onChange={handleNameChange}
 						/>
 						<InputField
 							label='amount'
-							placeholder={point.amount}
-							value={amountValue}
+							value={point.amount}
 							onChange={handleAmountChange}
 						/>
 						<InputField
 							label='x'
-							placeholder={point.x.toFixed(2)}
-							value={xValue}
+							value={point.x.toFixed(2)}
 							onChange={handleXValueChange}
 						/>
 						<InputField
 							label='y'
-							placeholder={point.y.toFixed(2)}
-							value={yValue}
+							value={point.y.toFixed(2)}
 							onChange={handleYValueChange}
 						/>
 					</form>

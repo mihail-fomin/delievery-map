@@ -28,9 +28,13 @@ const pointSlice = createSlice({
 			state.pointsList.push(action.payload)
 			localStorage.setItem('points', JSON.stringify(state.pointsList))
 		},
+		setChanges(state, action) {
+
+		},
 		removePoint(state, action) {
-			state.pointsList.filter(p => p.name !== action.payload)
-			console.log(' action.payload: ', action.payload);
+			state.pointsList = state.pointsList.filter(p => p.name !== action.payload)
+			localStorage.setItem('points', JSON.stringify(state.pointsList))
+
 		},
 		undoChanges(state) {
 			localStorage.removeItem('points')
@@ -55,6 +59,7 @@ const pointSlice = createSlice({
 export const {
 	loadFromLocalStorage,
 	addPoint,
+	setChanges,
 	removePoint,
 	undoChanges,
 	setNameValue,
