@@ -2,9 +2,8 @@ import * as React from 'react'
 import SignIn from './components/signIn/SignIn'
 import Map from './components/map/Map'
 
+
 function App() {
-
-
 	// переключаем скрины с помощью состояния
 	const [screenType, setScreenType] = React.useState(() => {
 		if (!!localStorage.getItem('sign-in')) {

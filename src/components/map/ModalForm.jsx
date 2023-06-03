@@ -1,33 +1,37 @@
 import { Dialog } from '@headlessui/react'
 import InputField from './Inputfield';
+import { useSelector, useDispatch } from 'react-redux'
+import {
+	addPoint,
+	setNameValue,
+	setAmountValue,
+} from '../../store/pointSlice';
+
 
 export default function ModalForm({
-	xValue,
-	yValue,
 	isOpen,
 	setIsOpen,
-	nameValue,
-	setNameValue,
-	amountValue,
-	setAmountValue,
-	points,
-	setPoints
 }) {
 
+	const nameValue = useSelector(state => state.points.nameValue)
+	const amountValue = useSelector(state => state.points.amountValue)
+	const xValue = useSelector(state => state.points.xValue)
+	const yValue = useSelector(state => state.points.yValue)
+
+	const dispatch = useDispatch()
+
 	const handleNameChange = (e) => {
-		setNameValue(e.target.value)
+		dispatch(setNameValue(e.target.value))
 	}
 
 	const handleAmountChange = (e) => {
-		setAmountValue(e.target.value)
+		dispatch(setAmountValue(e.target.value))
 	}
 
-	const handleSetPoints = (e) => {
-		e.preventDefault()
-		setPoints(
-			points.concat([{ name: nameValue, amount: amountValue, x: xValue, y: yValue }])
-		)
-		localStorage.setItem('points', JSON.stringify(points))
+	const handleSetPoints = () => {
+		dispatch(addPoint(
+			{ name: nameValue, amount: amountValue, x: xValue, y: yValue }
+		))
 		setIsOpen(false)
 	}
 

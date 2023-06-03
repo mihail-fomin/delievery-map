@@ -1,31 +1,30 @@
 import * as React from 'react'
-import initialPoints from '../../../public/model'
 import Point from './Point';
 import ModalForm from './ModalForm';
+import { useSelector, useDispatch } from 'react-redux'
+import { loadFromLocalStorage, undoChanges, setXValue, setYValue } from '../../store/pointSlice';
 
 
 export default function Map({ logout }) {
 	const [isOpen, setIsOpen] = React.useState(false)
 	const [clickOnMap, setClickOnMap] = React.useState(false)
 	const [hoveredIndex, setHoveredIndex] = React.useState(null);
-	const [nameValue, setNameValue] = React.useState('')
-	const [amountValue, setAmountValue] = React.useState('')
-	const [xValue, setXValue] = React.useState(0)
-	const [yValue, setYValue] = React.useState(0)
 
+	const points = useSelector(state => state.points.pointsList)
+	const dispatch = useDispatch()
 
-	const [points, setPoints] = React.useState(() => {
-		const str = localStorage.getItem('points')
-		if (!!str) {
-			return JSON.parse(str)
-		} else {
-			localStorage.setItem('points', JSON.stringify(initialPoints))
-			return initialPoints
-		}
-	})
+	React.useEffect(() => {
+		dispatch(loadFromLocalStorage())
+	}, [points.length])
+	console.log('points.length: ', points.length);
 
 	const handleAddClick = () => {
 		setClickOnMap(true)
+	}
+
+	const handleUndoChanges = () => {
+		dispatch(undoChanges())
+		dispatch(loadFromLocalStorage())
 	}
 
 	const handleIconMouseOver = (index) => {
@@ -40,16 +39,10 @@ export default function Map({ logout }) {
 
 		if (clickOnMap) {
 			setIsOpen(true)
-			setXValue(e.nativeEvent.offsetX / 10);
-			setYValue(e.nativeEvent.offsetY / 10);
+			dispatch(setXValue(e.nativeEvent.offsetX / 10))
+			dispatch(setYValue(e.nativeEvent.offsetY / 10))
 			setClickOnMap(false)
 		}
-	}
-
-
-	const handleUndoChanges = () => {
-		localStorage.removeItem('points')
-		setPoints(initialPoints)
 	}
 
 	const handleLogOut = (e) => {
@@ -81,17 +74,8 @@ export default function Map({ logout }) {
 					onClick={handleMapClick}
 					className='w-auto h-full ' src='../../../public/tutzing.svg' />
 				<ModalForm
-					xValue={xValue}
-					yValue={yValue}
 					isOpen={isOpen}
 					setIsOpen={setIsOpen}
-					nameValue={nameValue}
-					setNameValue={setNameValue}
-					amountValue={amountValue}
-					setAmountValue={setAmountValue}
-					// handleSetPoints={handleSetPoints}
-					points={points}
-					setPoints={setPoints}
 				/>
 				{points.map((point, index) => (
 					<Point
@@ -99,19 +83,9 @@ export default function Map({ logout }) {
 						point={point}
 						desc={`${point.name}`}
 						index={index}
-						nameValue={nameValue}
-						setNameValue={setNameValue}
-						amountValue={amountValue}
-						setAmountValue={setAmountValue}
-						xValue={xValue}
-						setXValue={setXValue}
-						yValue={yValue}
-						setYValue={setYValue}
 						isActive={hoveredIndex === index}
 						onMouseOver={handleIconMouseOver}
 						onMouseOut={handleIconMouseOut}
-						points={points}
-						setPoints={setPoints}
 					/>
 				))}
 			</div>

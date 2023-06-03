@@ -2,6 +2,15 @@ import * as React from 'react'
 import { MapPinIcon } from '@heroicons/react/24/solid'
 import { Dialog } from '@headlessui/react'
 import InputField from './Inputfield';
+import { useDispatch, useSelector } from 'react-redux'
+import {
+	loadFromLocalStorage,
+	removePoint,
+	setNameValue,
+	setAmountValue,
+	setXValue,
+	setYValue
+} from '../../store/pointSlice';
 
 
 export default function Point({
@@ -9,22 +18,17 @@ export default function Point({
 	desc,
 	index,
 	isActive,
-	nameValue,
-	setNameValue,
-	amountValue,
-	setAmountValue,
-	xValue,
-	setXValue,
-	yValue,
-	setYValue,
 	onMouseOver,
 	onMouseOut,
-	points,
-	setPoints,
-	remove
 }) {
 	const [isOpen, setIsOpen] = React.useState(false)
 
+	const nameValue = useSelector(state => state.points.nameValue)
+	const amountValue = useSelector(state => state.points.amountValue)
+	const xValue = useSelector(state => state.points.xValue)
+	const yValue = useSelector(state => state.points.yValue)
+
+	const dispatch = useDispatch()
 
 	const handleNameChange = (e) => {
 		setNameValue(e.target.value)
@@ -42,20 +46,16 @@ export default function Point({
 		setYValue(e.target.value)
 	}
 
-	// const setChanges = (name) => {
-	// 	const updatedPoints = points.map(p => {
-	// 		if (p.name === name) {
-	// 			return name
-	// 		} else {
-	// 			return p
-	// 		}
-	// 	})
-	// 	setPoints(updatedPoints)
-	// 	setIsOpen(false)
-	// }
+	const handleRemovePoint = (name) => {
+		console.log('name: ', name);
+		dispatch(removePoint(name))
+		setIsOpen(false)
+	}
+
 
 	return (
 		<div
+			key={point.name}
 			style={{ left: `${point.x}%`, top: `${point.y}%` }}
 			className='absolute w-6 h-6 text-red-700 transition-all duration-100 -translate-y-full cursor-pointer hover:text-red-600 hover:scale-125'
 			onClick={() => setIsOpen(true)}
@@ -72,7 +72,7 @@ export default function Point({
 				</div>
 			}
 			<Dialog
-				style={{ left: `${point.x.toFixed(2)}%`, top: `${point.y.toFixed(2)}%` }}
+				style={{ left: `${point.x}%`, top: `${point.y}%` }}
 				className='absolute p-2 bg-white rounded'
 				open={isOpen}
 				onClose={() => setIsOpen(false)}
@@ -106,7 +106,7 @@ export default function Point({
 					</form>
 					<button onClick={() => setIsOpen(false)}>Cancel</button>
 					{/* <button onClick={setChanges(point.name)}>Save changes</button> */}
-					{/* <button onClick={remove(point.name)}>Remove point</button> */}
+					<button onClick={() => handleRemovePoint(point.name)}>Remove point</button>
 				</Dialog.Panel>
 			</Dialog>
 		</div>
