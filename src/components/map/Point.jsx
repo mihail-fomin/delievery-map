@@ -82,21 +82,25 @@ export default function Point({
 							label='name'
 							value={point.name}
 							onChange={handleNameChange}
+							isNewPoint={false}
 						/>
 						<InputField
 							label='amount'
 							value={point.amount}
 							onChange={handleAmountChange}
+							isNewPoint={false}
 						/>
 						<InputField
 							label='x'
 							value={point.x.toFixed(2)}
 							onChange={handleXValueChange}
+							isNewPoint={false}
 						/>
 						<InputField
 							label='y'
 							value={point.y.toFixed(2)}
 							onChange={handleYValueChange}
+							isNewPoint={false}
 						/>
 					</form>
 					<button onClick={() => setIsOpen(false)}>Cancel</button>

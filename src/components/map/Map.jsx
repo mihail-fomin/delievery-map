@@ -16,7 +16,6 @@ export default function Map({ logout }) {
 	React.useEffect(() => {
 		dispatch(loadFromLocalStorage())
 	}, [points.length])
-	console.log('points.length: ', points.length);
 
 	const handleAddClick = () => {
 		setClickOnMap(true)
@@ -56,12 +55,19 @@ export default function Map({ logout }) {
 		<div className="container relative h-screen mx-auto">
 			<menu className="flex justify-between w-full my-3">
 				<div className='flex items-center gap-2'>
-					<button onClick={handleAddClick}>
-						{clickOnMap
-							? <p className='cursor-not-allowed animate-pulse'>Click on the map</p>
-							: 'Add point'}
-					</button>
+					{clickOnMap ?
+						<button className='cursor-not-allowed animate-pulse' onClick={handleAddClick}>
+							<p>Click on the map</p>
+						</button>
+						:
+						<button onClick={handleAddClick}>
+							<p>Add point</p>
+						</button>
+					}
 				</div>
+				<p className='my-auto'>
+					<strong>{points.length}</strong> points left to deliever
+				</p>
 				<button onClick={handleUndoChanges}>
 					Undo Changes
 				</button>

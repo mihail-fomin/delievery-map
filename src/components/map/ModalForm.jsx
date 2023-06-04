@@ -47,23 +47,21 @@ export default function ModalForm({
 				<form>
 					<InputField
 						label={'name'}
-						placeholder={'name'}
 						value={nameValue}
 						onChange={handleNameChange}
 					/>
 					<InputField
 						label={'amount'}
-						placeholder={'amount'}
 						value={amountValue}
 						onChange={handleAmountChange}
 					/>
 					<InputField
 						label={'x'}
-						placeholder={xValue}
+						value={xValue}
 					/>
 					<InputField
 						label={'y'}
-						placeholder={yValue}
+						value={yValue}
 					/>
 				</form>
 				<div className='flex gap-2 mt-3'>

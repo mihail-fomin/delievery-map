@@ -1,32 +1,41 @@
 import * as React from 'react'
 
-export default function InputField({ label, value, onChange }) {
+export default function InputField({ label, value, onChange, isNewPoint }) {
+
 	const [isEditing, setIsEditing] = React.useState(false)
-	let fieldContent;
-	if (isEditing) {
-		fieldContent = (
-			<div className='flex justify-between gap-2'>
-				<input
-					value={value}
-					onChange={onChange}
-				/>
-				<button onClick={() => setIsEditing(false)}>Save</button>
-			</div>
-		)
-	} else {
-		fieldContent = (
-			<div className='flex justify-between gap-2'>
-				{value}
+	let readFieldContent = (
+		<div className='flex items-center justify-between gap-2'>
+			{value}
+			{onChange &&
 				<button onClick={() => setIsEditing(true)}>Edit</button>
-			</div>
-		)
+			}
+		</div>
+	)
+
+	let writeFieldContent = (
+		<div className='flex justify-between gap-2 text-gray-500'>
+			<input
+				value={value}
+				onChange={onChange}
+			/>
+			<button onClick={() => setIsEditing(false)}>Save</button>
+		</div>
+	);
+
+	let content = () => {
+		if (isEditing) {
+			return writeFieldContent
+		} else {
+			return readFieldContent
+		}
 	}
+
 
 	return (
 		<div className='w-[300px]'>
-			<label>
+			<label >
 				{label}
-				{fieldContent}
+				{content()}
 			</label>
 		</div>
 	)
