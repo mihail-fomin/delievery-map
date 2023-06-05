@@ -1,1 +1,3 @@
-# delievery-map
+# delivery-map
+
+Запуск приложения: ```yarn dev```
