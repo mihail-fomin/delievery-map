@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import model from '../../public/model'
+import model from '../../public/model.js'
 
 
 const initialState = {

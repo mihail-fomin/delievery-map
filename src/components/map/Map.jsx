@@ -81,7 +81,7 @@ export default function Map({ logout }) {
 			<div className='relative w-[1000px] h-[1000px] mx-auto'>
 				<img
 					onClick={handleMapClick}
-					className='w-auto h-full ' src='../../../public/tutzing.svg' />
+					className='w-auto h-full ' src='../../../tutzing.svg' />
 				<NewPointModal
 					isOpen={isOpen}
 					setIsOpen={setIsOpen}
