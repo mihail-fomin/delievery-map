@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { MapPinIcon, TrashIcon } from '@heroicons/react/24/solid'
 import InputField from './Inputfield';
-import { useDispatch, useSelector } from 'react-redux'
-import { addPoint, loadFromLocalStorage, removePoint } from '../../store/pointSlice';
+import { useDispatch } from 'react-redux'
+import { addPoint, removePoint } from '../../store/pointSlice';
 import Modal from './Modal'
 
 export default function Point({
@@ -109,7 +109,6 @@ export default function Point({
 						<TrashIcon className='w-6 h-6' />
 					</button>
 				</div>
-
 			</Modal>
 		</div>
 	)
