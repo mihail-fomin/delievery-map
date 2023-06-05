@@ -1,6 +1,13 @@
 # delivery-map
 
-Запуск приложения: ```yarn dev```
+Запуск приложения:
+```
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
 
 Логин/пароль от формы входа: test/test
 
