@@ -32,12 +32,6 @@ const pointSlice = createSlice({
 			}
 			localStorage.setItem('points', JSON.stringify(state.pointsList))
 		},
-		// изменение поинта
-		updateChanges(state, action) {
-			const pointInList = state.pointsList.find(p => p.x === action.payload.x
-				&& p.y === action.payload.y)
-
-		},
 		removePoint(state, action) {
 			state.pointsList = state.pointsList.filter(p => (
 				p.name !== action.payload))

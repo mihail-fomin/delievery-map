@@ -37,9 +37,19 @@ export default function Point({
 	}
 
 	const handleSaveChanges = () => {
-		dispatch(addPoint(
-			{ name: nameValue, amount: amountValue, x: point.x, y: point.y }
-		))
+		if (nameValue === '') {
+			dispatch(addPoint(
+				{ name: point.name, amount: amountValue, x: point.x, y: point.y }
+			))
+		} else if (amountValue === '') {
+			dispatch(addPoint(
+				{ name: nameValue, amount: point.amount, x: point.x, y: point.y }
+			))
+		} else {
+			dispatch(addPoint(
+				{ name: nameValue, amount: amountValue, x: point.x, y: point.y }
+			))
+		}
 		setIsOpen(false)
 	}
 
@@ -91,12 +101,15 @@ export default function Point({
 						value={Number(point.y).toFixed(2)}
 					/>
 				</form>
-				<button onClick={() => handleRemovePoint(point.name)}>
-					<TrashIcon className='w-6 h-6' />
-				</button>
-				<button onClick={handleSaveChanges}>
-					Save Changes
-				</button>
+				<div className='flex justify-between gap-2 mt-3'>
+					<button onClick={handleSaveChanges}>
+						Save
+					</button>
+					<button onClick={() => handleRemovePoint(point.name)}>
+						<TrashIcon className='w-6 h-6' />
+					</button>
+				</div>
+
 			</Modal>
 		</div>
 	)
