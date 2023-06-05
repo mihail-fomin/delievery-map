@@ -8,7 +8,7 @@ body {
 
 
 input {
-	@apply block border-2 border-gray-200 px-2 rounded
+	@apply block border-2 border-gray-200 px-2 rounded w-[200px]
 }
 
 input:focus {

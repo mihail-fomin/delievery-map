@@ -1,14 +1,17 @@
 import * as React from 'react'
 import Point from './Point';
-import ModalForm from './ModalForm';
+import NewPointModal from './NewModal';
 import { useSelector, useDispatch } from 'react-redux'
-import { loadFromLocalStorage, undoChanges, setXValue, setYValue } from '../../store/pointSlice';
+import { loadFromLocalStorage, undoChanges } from '../../store/pointSlice';
 
 
 export default function Map({ logout }) {
 	const [isOpen, setIsOpen] = React.useState(false)
 	const [clickOnMap, setClickOnMap] = React.useState(false)
 	const [hoveredIndex, setHoveredIndex] = React.useState(null);
+
+	const [xValue, setXValue] = React.useState(0)
+	const [yValue, setYValue] = React.useState(0)
 
 	const points = useSelector(state => state.points.pointsList)
 	const dispatch = useDispatch()
@@ -38,8 +41,8 @@ export default function Map({ logout }) {
 
 		if (clickOnMap) {
 			setIsOpen(true)
-			dispatch(setXValue(e.nativeEvent.offsetX / 10))
-			dispatch(setYValue(e.nativeEvent.offsetY / 10))
+			setXValue(e.nativeEvent.offsetX / 10)
+			setYValue(e.nativeEvent.offsetY / 10)
 			setClickOnMap(false)
 		}
 	}
@@ -79,9 +82,12 @@ export default function Map({ logout }) {
 				<img
 					onClick={handleMapClick}
 					className='w-auto h-full ' src='../../../public/tutzing.svg' />
-				<ModalForm
+				<NewPointModal
 					isOpen={isOpen}
 					setIsOpen={setIsOpen}
+					xValue={xValue}
+					yValue={yValue}
+
 				/>
 				{points.map((point, index) => (
 					<Point
@@ -89,7 +95,7 @@ export default function Map({ logout }) {
 						point={point}
 						desc={`${point.name}`}
 						index={index}
-						isActive={hoveredIndex === index}
+						isLabelActive={hoveredIndex === index}
 						onMouseOver={handleIconMouseOver}
 						onMouseOut={handleIconMouseOut}
 					/>

@@ -1,22 +1,20 @@
 import { Dialog } from '@headlessui/react'
 import InputField from './Inputfield';
 import { useSelector, useDispatch } from 'react-redux'
+import { XMarkIcon } from '@heroicons/react/24/solid'
+import { addPoint } from '../../store/pointSlice';
 import {
-	addPoint,
 	setNameValue,
 	setAmountValue,
-} from '../../store/pointSlice';
+	setXValue,
+	setYValue,
+} from '../../store/modalSlice'
 
-
-export default function ModalForm({
-	isOpen,
-	setIsOpen,
-}) {
-
-	const nameValue = useSelector(state => state.points.nameValue)
-	const amountValue = useSelector(state => state.points.amountValue)
-	const xValue = useSelector(state => state.points.xValue)
-	const yValue = useSelector(state => state.points.yValue)
+export default function NewPointModal({ isOpen, setIsOpen }) {
+	const nameValue = useSelector(state => state.modal.nameValue)
+	const amountValue = useSelector(state => state.modal.amountValue)
+	const xValue = useSelector(state => state.modal.xValue)
+	const yValue = useSelector(state => state.modal.yValue)
 
 	const dispatch = useDispatch()
 
@@ -44,6 +42,15 @@ export default function ModalForm({
 		>
 			<Dialog.Panel>
 
+				<div className='flex justify-end'>
+					<button
+						className='w-6 h-6 p-0'
+						onClick={() => setIsOpen(false)}
+					>
+						<XMarkIcon />
+					</button>
+				</div>
+
 				<form>
 					<InputField
 						label={'name'}
@@ -66,7 +73,6 @@ export default function ModalForm({
 				</form>
 				<div className='flex gap-2 mt-3'>
 					<button onClick={handleSetPoints}>Set</button>
-					<button onClick={() => setIsOpen(false)}>Cancel</button>
 				</div>
 			</Dialog.Panel>
 		</Dialog>

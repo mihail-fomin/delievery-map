@@ -4,5 +4,6 @@ import pointSlice from './pointSlice'
 export const store = configureStore({
 	reducer: {
 		points: pointSlice,
+
 	},
 })

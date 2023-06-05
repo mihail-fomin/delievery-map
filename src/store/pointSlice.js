@@ -4,10 +4,6 @@ import model from '../../public/model'
 
 const initialState = {
 	pointsList: [],
-	nameValue: '',
-	amountValue: '',
-	xValue: 0,
-	yValue: 0,
 }
 
 const pointSlice = createSlice({
@@ -25,33 +21,31 @@ const pointSlice = createSlice({
 		},
 		// логика обновлений модели
 		addPoint(state, action) {
-			state.pointsList.push(action.payload)
+			const pointInList = state.pointsList.find(p => p.x === action.payload.x
+				&& p.y === action.payload.y)
+			console.log('action.payload: ', action.payload);
+			if (typeof pointInList === 'object') {
+				pointInList.name = action.payload.name
+				pointInList.amount = action.payload.amount
+			} else {
+				state.pointsList.push(action.payload)
+			}
 			localStorage.setItem('points', JSON.stringify(state.pointsList))
 		},
-		setChanges(state, action) {
+		// изменение поинта
+		updateChanges(state, action) {
+			const pointInList = state.pointsList.find(p => p.x === action.payload.x
+				&& p.y === action.payload.y)
 
 		},
 		removePoint(state, action) {
-			state.pointsList = state.pointsList.filter(p => p.name !== action.payload)
+			state.pointsList = state.pointsList.filter(p => (
+				p.name !== action.payload))
 			localStorage.setItem('points', JSON.stringify(state.pointsList))
-
 		},
 		undoChanges(state) {
 			localStorage.removeItem('points')
 			state.pointsList = model
-		},
-		// обработка состояний инпутов
-		setNameValue(state, action) {
-			state.nameValue = action.payload
-		},
-		setAmountValue(state, action) {
-			state.amountValue = action.payload
-		},
-		setXValue(state, action) {
-			state.xValue = action.payload
-		},
-		setYValue(state, action) {
-			state.yValue = action.payload
 		},
 	}
 })
@@ -62,9 +56,5 @@ export const {
 	setChanges,
 	removePoint,
 	undoChanges,
-	setNameValue,
-	setAmountValue,
-	setXValue,
-	setYValue
 } = pointSlice.actions
 export default pointSlice.reducer
