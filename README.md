@@ -9,6 +9,6 @@ yarn dev
 pnpm dev
 ```
 
-Логин/пароль от формы входа: test/test
+Логин/пароль от формы входа: <b>test/test</b>
 
 [Задеплоенная актуальная версия](https://delievery-map.vercel.app/)
