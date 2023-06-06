@@ -1,7 +1,14 @@
 # delivery-map
 
-Запуск приложения: ```yarn dev```
+Запуск приложения:
+```
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
 
-Логин/пароль от формы входа: test/test
+Логин/пароль от формы входа: <b>test/test</b>
 
 [Задеплоенная актуальная версия](https://delievery-map.vercel.app/)
