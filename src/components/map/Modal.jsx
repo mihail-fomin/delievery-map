@@ -4,7 +4,16 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 export default function MyCustomDialog({
 	isOpen,
 	setIsOpen,
-	children }) {
+	children,
+	setHoveredIndex
+}) {
+
+	const handleCloseClick = () => {
+
+		setIsOpen(false)
+		setHoveredIndex(null)
+	}
+
 	return (
 		<Dialog
 			style={{
@@ -17,13 +26,13 @@ export default function MyCustomDialog({
 			}}
 			className='absolute p-2 bg-white rounded'
 			open={isOpen}
-			onClose={() => setIsOpen(false)}
+			onClose={handleCloseClick}
 		>
 			<Dialog.Panel>
 				<div className='flex justify-end'>
 					<button
 						className='w-6 h-6 p-0'
-						onClick={() => setIsOpen(false)}
+						onClick={handleCloseClick}
 					>
 						<XMarkIcon />
 					</button>

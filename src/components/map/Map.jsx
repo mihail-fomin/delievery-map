@@ -84,6 +84,7 @@ export default function Map({ logout }) {
 					setIsOpen={setIsOpen}
 					xValue={xValue}
 					yValue={yValue}
+					setHoveredIndex={setHoveredIndex}
 				/>
 				{points.map((point, index) => (
 					<Point
@@ -92,6 +93,7 @@ export default function Map({ logout }) {
 						desc={point.name}
 						index={index}
 						isLabelActive={hoveredIndex === index}
+						setHoveredIndex={setHoveredIndex}
 						onMouseOver={handleIconMouseOver}
 						onMouseOut={handleIconMouseOut}
 					/>

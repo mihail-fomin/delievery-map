@@ -8,7 +8,8 @@ import { TrashIcon } from '@heroicons/react/24/solid'
 export default function EditModal({
 	isOpen,
 	setIsOpen,
-	point
+	point,
+	setHoveredIndex
 }) {
 	const [nameValue, setNameValue] = React.useState('')
 	const [amountValue, setAmountValue] = React.useState('')
@@ -26,6 +27,7 @@ export default function EditModal({
 	const handleRemovePoint = (point) => {
 		dispatch(removePoint(point))
 		setIsOpen(false)
+		setHoveredIndex(null)
 	}
 
 
@@ -44,6 +46,7 @@ export default function EditModal({
 			))
 		}
 		setIsOpen(false)
+		setHoveredIndex(null)
 	}
 
 	return (
@@ -52,6 +55,7 @@ export default function EditModal({
 			yValue={point.y}
 			isOpen={isOpen}
 			setIsOpen={setIsOpen}
+			setHoveredIndex={setHoveredIndex}
 		>
 			<form>
 				<InputField

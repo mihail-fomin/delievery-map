@@ -8,6 +8,7 @@ export default function Point({
 	desc,
 	index,
 	isLabelActive,
+	setHoveredIndex,
 	onMouseOver,
 	onMouseOut,
 }) {
@@ -36,6 +37,7 @@ export default function Point({
 				isOpen={isOpen}
 				setIsOpen={setIsOpen}
 				point={point}
+				setHoveredIndex={setHoveredIndex}
 			/>
 		</div>
 	)
