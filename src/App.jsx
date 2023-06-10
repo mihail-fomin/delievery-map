@@ -29,7 +29,7 @@ function App() {
 
 	return (
 		<>
-		// делаем имитацию роутинга
+			{/* делаем имитацию роутинга */}
 			{screenType === 'auth'
 				? <SignIn signIn={handleLogIn} />
 				: <Map logout={handleLogOut} />
