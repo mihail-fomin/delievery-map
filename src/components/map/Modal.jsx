@@ -2,8 +2,6 @@ import { Dialog } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 
 export default function MyCustomDialog({
-	xValue,
-	yValue,
 	isOpen,
 	setIsOpen,
 	children }) {

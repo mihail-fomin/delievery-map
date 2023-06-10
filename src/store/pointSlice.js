@@ -23,7 +23,6 @@ const pointSlice = createSlice({
 		addPoint(state, action) {
 			const pointInList = state.pointsList.find(p => p.x === action.payload.x
 				&& p.y === action.payload.y)
-			console.log('action.payload: ', action.payload);
 			if (typeof pointInList === 'object') {
 				pointInList.name = action.payload.name
 				pointInList.amount = action.payload.amount
