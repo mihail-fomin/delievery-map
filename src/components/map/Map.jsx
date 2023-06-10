@@ -30,15 +30,14 @@ export default function Map({ logout }) {
 	}
 
 	const handleIconMouseOver = (index) => {
-		setHoveredIndex(index);
+		setHoveredIndex(index)
 	}
 
 	const handleIconMouseOut = () => {
-		setHoveredIndex(null);
+		setHoveredIndex(null)
 	}
 
 	const handleMapClick = (e) => {
-
 		if (clickOnMap) {
 			setIsOpen(true)
 			setXValue(e.nativeEvent.offsetX / 10)
@@ -54,15 +53,13 @@ export default function Map({ logout }) {
 
 
 	return (
-
 		<div className="container relative h-screen mx-auto">
 			<menu className="flex justify-between w-full my-3">
 				<div className='flex items-center gap-2'>
 					{clickOnMap ?
 						<button className='cursor-not-allowed animate-pulse' onClick={handleAddClick}>
 							<p>Click on the map</p>
-						</button>
-						:
+						</button> :
 						<button onClick={handleAddClick}>
 							<p>Add point</p>
 						</button>
@@ -87,13 +84,12 @@ export default function Map({ logout }) {
 					setIsOpen={setIsOpen}
 					xValue={xValue}
 					yValue={yValue}
-
 				/>
 				{points.map((point, index) => (
 					<Point
 						key={index}
 						point={point}
-						desc={`${point.name}`}
+						desc={point.name}
 						index={index}
 						isLabelActive={hoveredIndex === index}
 						onMouseOver={handleIconMouseOver}

@@ -30,7 +30,6 @@ export default function MyCustomDialog({
 				</div>
 				{children}
 			</Dialog.Panel>
-
 		</Dialog>
 	)
 }

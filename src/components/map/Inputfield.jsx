@@ -11,7 +11,6 @@ export default function InputField({ label, value, newValue, onChange }) {
 		setIsEditing(true)
 	}
 
-
 	let readFieldContent = (
 		<div className='flex items-center justify-between gap-2'>
 			<p className='font-bold'>{value}</p>
