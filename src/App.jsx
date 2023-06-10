@@ -21,12 +21,15 @@ function App() {
 	}, [])
 
 	const handleLogIn = React.useCallback(() => {
+		// сохраняем запись об удачном входе в local storage
 		localStorage.setItem('sign-in', true)
+		// ... и меняем состояние на карту
 		setScreenType('map')
 	}, [])
 
 	return (
 		<>
+		// делаем имитацию роутинга
 			{screenType === 'auth'
 				? <SignIn signIn={handleLogIn} />
 				: <Map logout={handleLogOut} />
