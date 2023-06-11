@@ -85,7 +85,7 @@ export default function EditModal({
 				<button onClick={handleSaveChanges}>
 					Save
 				</button>
-				<button onClick={() => handleRemovePoint(point.name)}>
+				<button onClick={() => handleRemovePoint(point)}>
 					<TrashIcon className='w-6 h-6' />
 				</button>
 			</div>

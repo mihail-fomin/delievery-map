@@ -33,7 +33,7 @@ const pointSlice = createSlice({
 		},
 		removePoint(state, action) {
 			state.pointsList = state.pointsList.filter(p => (
-				p.name !== action.payload))
+				p.x !== action.payload.x && p.y !== action.payload.y))
 			localStorage.setItem('points', JSON.stringify(state.pointsList))
 		},
 		undoChanges(state) {
