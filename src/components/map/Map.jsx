@@ -53,7 +53,7 @@ export default function Map({ logout }) {
 
 
 	return (
-		<div className="container relative h-screen mx-auto">
+		<div className="container relative h-screen px-4 mx-auto">
 			<menu className="flex justify-between w-full my-3">
 				<div className='flex items-center gap-2'>
 					{clickOnMap ?
