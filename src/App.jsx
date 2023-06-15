@@ -1,9 +1,19 @@
 import * as React from 'react'
 import SignIn from './components/signIn/SignIn'
 import Map from './components/map/Map'
+import { useDispatch, useSelector } from 'react-redux'
+import { loadFromLocalStorage } from './store/pointSlice'
 
 
 function App() {
+
+	const dispatch = useDispatch()
+	const points = useSelector(state => state.points.pointsList)
+
+	React.useEffect(() => {
+		dispatch(loadFromLocalStorage())
+	}, [])
+
 	// переключаем скрины с помощью состояния
 	const [screenType, setScreenType] = React.useState(() => {
 		if (!!localStorage.getItem('sign-in')) {
